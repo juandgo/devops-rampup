@@ -25,6 +25,7 @@ app.get('/movies', function(req, res){
   request
     .get(`http://${backend_url}/movies`)
     .end(function(err, data) {
+      if (err || !data) { return res.status(502).send("Backend unavailable"); }
       if(data.status == 403){
         res.send(403, '403 Forbidden');
       } else {
@@ -41,6 +42,7 @@ app.get('/authors', function(req, res){
     .get(`http://${backend_url}/reviewers`)
     .set('Authorization', 'Bearer ' + req.access_token)
     .end(function(err, data) {
+      if (err || !data) { return res.status(502).send("Backend unavailable"); }
       if(data.status == 403){
         res.send(403, '403 Forbidden');
       } else {
@@ -54,6 +56,7 @@ app.get('/publications', function(req, res){
   request
     .get(`http://${backend_url}/publications`)
     .end(function(err, data) {
+      if (err || !data) { return res.status(502).send("Backend unavailable"); }
       if(data.status == 403){
         res.send(403, '403 Forbidden');
       } else {
@@ -68,6 +71,7 @@ app.get('/pending', function(req, res){
   request
     .get(`http://${backend_url}/pending`)
     .end(function(err, data) {
+      if (err || !data) { return res.status(502).send("Backend unavailable"); }
       if(data.status == 403){
         res.send(403, '403 Forbidden');
       }
